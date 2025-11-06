@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monjurul Haque - Lecturer of Economics</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts (Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- Base Page & Font Styling --- */
+        body {
+            /* This background color is ESSENTIAL for the nav's "cutout" effect */
+            background-color: #353b48; 
+            font-family: 'Inter', sans-serif;
+            /* Add padding to the bottom to prevent content from hiding behind the fixed nav */
+            padding-bottom: 120px;
+        }
+
+        /* --- Magic Navigation Menu CSS (Adapted for Fixed Position) --- */
+        .navigation {
+            position: fixed; /* Fixed to the viewport */
+            bottom: 20px;    /* 20px from the bottom */
+            left: 50%;       /* Centered horizontally */
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            height: 70px;
+            background: #2f3640;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .navigation ul {
+            display: flex;
+            width: 100%;
+            padding: 0;
+        }
+
+        .navigation ul li {
+            position: relative;
+            list-style: none;
+            width: 20%; /* 100% / 5 items */
+            height: 70px;
+            z-index: 1;
+        }
+
+        .navigation ul li a {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            font-weight: 500;
+            text-decoration: none;
+            cursor: pointer; /* Show pointer on click */
+        }
+
+        .navigation ul li a .icon {
+            position: relative;
+            display: block;
+            line-height: 75px;
+            font-size: 1.8rem;
+            text-align: center;
+            transition: 0.5s;
+            color: #dcdde1;
+        }
+
+        .navigation ul li a .text {
+            position: absolute;
+            color: #dcdde1;
+            font-weight: 400;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            opacity: 0;
+            transform: translateY(20px);
+            white-space: nowrap;
+        }
+
+        /* Active State */
+        .navigation ul li.active a .icon {
+            transform: translateY(-32px);
+            color: #ffffff;
+        }
+
+        .navigation ul li.active a .text {
+            opacity: 1;
+            transform: translateY(12px);
+            color: #ffffff;
+        }
+
+        /* Indicator */
+        .indicator {
+            position: absolute;
+            top: -45%;
+            width: 65px;
+            height: 65px;
+            background: #4cd137; /* Keeping the green from your example */
+            border-radius: 50%;
+            /* This border color MUST match the page's body background */
+            border: 6px solid #353b48; 
+            transition: 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 0;
+        }
+
+        /* Indicator movement */
+        .navigation ul li:nth-child(1).active ~ .indicator { left: calc(20% * 1 - 10%); }
+        .navigation ul li:nth-child(2).active ~ .indicator { left: calc(20% * 2 - 10%); }
+        .navigation ul li:nth-child(3).active ~ .indicator { left: calc(20% * 3 - 10%); }
+        .navigation ul li:nth-child(4).active ~ .indicator { left: calc(20% * 4 - 10%); }
+        .navigation ul li:nth-child(5).active ~ .indicator { left: calc(20% * 5 - 10%); }
+
+        /* Responsive adjustments for nav */
+        @media (max-width: 420px) {
+            .navigation { height: 60px; }
+            .navigation ul li { height: 60px; }
+            .navigation ul li a .icon { font-size: 1.5rem; line-height: 65px; }
+            .navigation ul li.active a .icon { transform: translateY(-28px); }
+            .navigation ul li a .text { font-size: 0.7rem; }
+            .navigation ul li.active a .text { transform: translateY(8px); }
+            .indicator { width: 60px; height: 60px; }
+        }
+
+        /* --- Page Content Styling --- */
+        /* This class is used by JS to hide/show page sections */
+        .page-content {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="text-gray-100">
+
+    <!-- Main Content Container -->
+    <div class="container mx-auto max-w-4xl p-4 sm:p-8">
+
+        <!-- Header Section -->
+        <header class="text-center my-12 sm:my-16">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white mb-2">
+                Monjurul Haque
+            </h1>
+            <p class="text-xl sm:text-2xl text-gray-300">
+                Lecturer of Economics
+            </p>
+        </header>
+
+        <!-- Page Content Area -->
+        <main>
+
+            <!-- Page 1: Home (Visible by default) -->
+            <section id="home" class="page-content" style="display: block;">
+                <div class="bg-gray-800 rounded-lg shadow-2xl p-6 sm:p-8">
+                    <h2 class="text-3xl font-bold text-white mb-4">Welcome to My Blog</h2>
+                    <div class="space-y-4 text-gray-300 leading-relaxed">
+                        <p>
+                            Hello and welcome! I'm Monjurul Haque, an economics lecturer passionate about making complex economic theories accessible to everyone. Here, I share my thoughts on current events, breakdowns of economic principles, and updates on my latest research.
+                        </p>
+                        <p>
+                            My goal is to foster a better understanding of the economic forces that shape our world. Whether you're a student, a fellow academic, or just a curious mind, I hope you find the content here insightful and engaging.
+                        </p>
+                        <p>
+                            Use the navigation bar below to explore my articles, learn more about my background, or get in touch.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 2: About (Hidden by default) -->
+            <section id="about" class="page-content" style="display: none;">
+                <div class="bg-gray-800 rounded-lg shadow-2xl p-6 sm:p-8">
+                    <h2 class="text-3xl font-bold text-white mb-4">About Me</h2>
+                    <div class="space-y-4 text-gray-300 leading-relaxed">
+                        <!-- Placeholder Image -->
+                        <img src="https://placehold.co/600x400/2f3640/dcdde1?text=Monjurul+Haque" alt="A portrait of Monjurul Haque" class="w-full h-auto rounded-lg mb-6">
+                        <p>
+                            I hold a Master's degree in Economics from the University of Dhaka and have been teaching at the collegiate level for over five years. My academic interests lie at the intersection of microeconomics, behavioral economics, and public policy.
+                        </p>
+                        <p>
+                            I believe that economics is not just about graphs and equations; it's a powerful tool for understanding human behavior and solving real-world problems. When I'm not teaching or writing, I enjoy reading historical non-fiction and exploring the local food scene.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 3: Blog (Hidden by default) -->
+            <section id="blog" class="page-content" style="display: none;">
+                <div class="bg-gray-800 rounded-lg shadow-2xl p-6 sm:p-8">
+                    <h2 class="text-3xl font-bold text-white mb-6">Latest Articles</h2>
+                    <div class="space-y-6">
+                        <!-- Blog Post 1 -->
+                        <article class="border-b border-gray-700 pb-4">
+                            <h3 class="text-2xl font-semibold text-white hover:text-green-400 transition duration-300 cursor-pointer">The Gig Economy: Freedom or Precarity?</h3>
+                            <p class="text-sm text-gray-400 mb-2">November 5, 2025</p>
+                            <p class="text-gray-300 leading-relaxed">
+                                A deep dive into the pros and cons of the rising gig economy, examining its impact on traditional employment models and social safety nets...
+                            </p>
+                            <!-- Read More Button -->
+                            <a href="#" class="inline-block bg-green-600 hover:bg-green-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors duration-300 mt-3">
+                                Read More
+                            </a>
+                            <!-- Share Buttons -->
+                            <div class="mt-4 flex items-center gap-4">
+                                <span class="text-sm text-gray-400">Share:</span>
+                                <a onclick="shareOn('facebook', 'https://your-blog.com/post1', 'The Gig Economy: Freedom or Precarity?')" role="button" class="text-gray-400 hover:text-green-500 transition-colors duration-300 text-2xl cursor-pointer">
+                                    <ion-icon name="logo-facebook"></ion-icon>
+                                </a>
+                                <a onclick="shareOn('x', 'https://your-blog.com/post1', 'The Gig Economy: Freedom or Precarity?')" role="button" class="text-gray-400 hover:text-green-500 transition-colors duration-300 text-2xl cursor-pointer">
+                                    <ion-icon name="logo-x"></ion-icon>
+                                </a>
+                                <a onclick="shareOn('linkedin', 'https://your-blog.com/post1', 'The Gig Economy: Freedom or Precarity?')" role="button" class="text-gray-400 hover:text-green-500 transition-colors duration-300 text-2xl cursor-pointer">
+                                    <ion-icon name="logo-linkedin"></ion-icon>
+                                </a>
+                            </div>
+                        </article>
+                        <!-- Blog Post 2 -->
+                        <article class="border-b border-gray-700 pb-4">
+                            <h3 class="text-2xl font-semibold text-white hover:text-green-400 transition duration-300 cursor-pointer">Inflation Explained: Beyond the Headlines</h3>
+                            <p class="text-sm text-gray-400 mb-2">October 28, 2025</p>
+                            <p class="text-gray-300 leading-relaxed">
+                                Prices are rising, but what does that really mean? This post breaks down the different types of inflation, their causes, and what central banks can (and can't) do about it...
+                            </p>
+                            <!-- Read More Button -->
+                            <a href="#" class="inline-block bg-green-600 hover:bg-green-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors duration-300 mt-3">
+                                Read More
+                            </a>
+                            <!-- Share Buttons -->
+                            <div class="mt-4 flex items-center gap-4">
+                                <span class="text-sm text-gray-400">Share:</span>
+                                <a onclick="shareOn('facebook', 'https://your-blog.com/post2', 'Inflation Explained: Beyond the Headlines')" role="button" class="text-gray-400 hover:text-green-500 transition-colors duration-300 text-2xl cursor-pointer">
+                                    <ion-icon name="logo-facebook"></ion-icon>
+                                </a>
+                                <a onclick="shareOn('x', 'https://your-blog.com/post2', 'Inflation Explained: Beyond the Headlines')" role="button" class="text-gray-400 hover:text-green-500 transition-colors duration-300 text-2xl cursor-pointer">
+                                    <ion-icon name="logo-x"></ion-icon>
+                                </a>
+                                <a onclick="shareOn('linkedin', 'https://your-blog.com/post2', 'Inflation Explained: Beyond the Headlines')" role="button" class="text-gray-400 hover:text-green-500 transition-colors duration-300 text-2xl cursor-pointer">
+                                    <ion-icon name="logo-linkedin"></ion-icon>
+                                </a>
+                            </div>
+                        </article>
+                        <!-- Blog Post 3 -->
+                        <article>
+                            <h3 class="text-2xl font-semibold text-white hover:text-green-400 transition duration-300 cursor-pointer">Behavioral Nudges in Public Policy</h3>
+                            <p class="text-sm text-gray-400 mb-2">October 15, 2025</p>
+                            <p class="text-gray-300 leading-relaxed">
+                                How small, simple changes in how choices are presented can lead to big differences in public outcomes, from organ donation rates to retirement savings...
+                            </p>
+                            <!-- Read More Button -->
+                            <a href="#" class="inline-block bg-green-600 hover:bg-green-700 text-white text-sm font-medium py-2 px-4 rounded-lg transition-colors duration-300 mt-3">
+                                Read More
+                            </a>
+                            <!-- Share Buttons -->
+                            <div class="mt-4 flex items-center gap-4">
+                                <span class="text-sm text-gray-400">Share:</span>
+                                <a onclick="shareOn('facebook', 'https://your-blog.com/post3', 'Behavioral Nudges in Public Policy')" role="button" class="text-gray-400 hover:text-green-500 transition-colors duration-300 text-2xl cursor-pointer">
+                                    <ion-icon name="logo-facebook"></ion-icon>
+                                </a>
+                                <a onclick="shareOn('x', 'https://your-blog.com/post3', 'Behavioral Nudges in Public Policy')" role="button" class="text-gray-400 hover:text-green-500 transition-colors duration-300 text-2xl cursor-pointer">
+                                    <ion-icon name="logo-x"></ion-icon>
+                                </a>
+                                <a onclick="shareOn('linkedin', 'https://your-blog.com/post3', 'Behavioral Nudges in Public Policy')" role="button" class="text-gray-400 hover:text-green-500 transition-colors duration-300 text-2xl cursor-pointer">
+                                    <ion-icon name="logo-linkedin"></ion-icon>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Page 4: Research (Hidden by default) -->
+            <section id="research" class="page-content" style="display: none;">
+                <div class="bg-gray-800 rounded-lg shadow-2xl p-6 sm:p-8">
+                    <h2 class="text-3xl font-bold text-white mb-6">Research & Publications</h2>
+                    <ul class="space-y-4 list-disc list-inside text-gray-300">
+                        <li>
+                            <span class="font-semibold text-white">"The Impact of Mobile Financial Services on Rural Household Savings."</span> (2024). Journal of Development Economics.
+                        </li>
+                        <li>
+                            <span class="font-semibold text-white">"Choice Architecture and Student Loan Decisions."</span> (2023). The Review of Economic Studies.
+                        </li>
+                        <li>
+                            <span class="font-semibold text-white">"A Comparative Analysis of Carbon Taxation Models in South Asia."</span> (2022). Energy Policy.
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Page 5: Contact (Hidden by default) -->
+            <section id="contact" class="page-content" style="display: none;">
+                <div class="bg-gray-800 rounded-lg shadow-2xl p-6 sm:p-8">
+                    <h2 class="text-3xl font-bold text-white mb-6">Get in Touch</h2>
+                    <p class="text-gray-300 mb-6">
+                        Have a question, a collaboration proposal, or just want to discuss an idea? Feel free to reach out.
+                    </p>
+                    <form action="#" method="POST" class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Name</label>
+                            <input type="text" id="name" name="name" class="w-full bg-gray-700 text-white border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                            <input type="email" id="email" name="email" class="w-full bg-gray-700 text-white border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full bg-gray-700 text-white border-gray-600 rounded-lg p-3 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition duration-300"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg shadow-lg transition duration-300 transform hover:scale-105">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <!-- Magic Navigation Menu -->
+    <nav class="navigation">
+        <ul>
+            <!-- Item 1: Home (Active by default) -->
+            <li class="list active">
+                <a data-target="home">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="text">Home</span>
+                </a>
+            </li>
+
+            <!-- Item 2: About -->
+            <li class="list">
+                <a data-target="about">
+                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                    <span class="text">About</span>
+                </a>
+            </li>
+
+            <!-- Item 3: Blog -->
+            <li class="list">
+                <a data-target="blog">
+                    <span class="icon"><ion-icon name="newspaper-outline"></ion-icon></span>
+                    <span class="text">Blog</span>
+                </a>
+            </li>
+
+            <!-- Item 4: Research -->
+            <li class="list">
+                <a data-target="research">
+                    <span class="icon"><ion-icon name="analytics-outline"></ion-icon></span>
+                    <span class="text">Research</span>
+                </a>
+            </li>
+
+            <!-- Item 5: Contact -->
+            <li class="list">
+                <a data-target="contact">
+                    <span class="icon"><ion-icon name="mail-outline"></ion-icon></span>
+                    <span class="text">Contact</span>
+                </a>
+            </li>
+
+            <div class="indicator"></div>
+        </ul>
+    </nav>
+
+    <!-- IonIcons Script -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <!-- Page Switching JavaScript -->
+    <script>
+        /**
+         * Opens a popup window to share content on social media.
+         * @param {string} platform - The social platform (e.g., 'facebook', 'x', 'linkedin')
+         * @param {string} url - The URL to share.
+         * @param {string} text - The text/title to accompany the share.
+         */
+        function shareOn(platform, url, text) {
+            let shareUrl = '';
+            const encodedUrl = encodeURIComponent(url);
+            const encodedText = encodeURIComponent(text);
+
+            switch (platform) {
+                case 'facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+                    break;
+                case 'x': // For Twitter/X
+                    shareUrl = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedText}`;
+                    break;
+                case 'linkedin':
+                    shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${encodedUrl}&title=${encodedText}`;
+                    break;
+                default:
+                    console.error('Unknown share platform:', platform);
+                    return;
+            }
+
+            // Open a popup window
+            window.open(shareUrl, '_blank', 'width=600,height=400,noopener,noreferrer');
+        }
+
+
+        const list = document.querySelectorAll('.list');
+        const pageContent = document.querySelectorAll('.page-content');
+
+        list.forEach((item) => {
+            item.addEventListener('click', () => {
+                // 1. Handle Active State for Nav
+                list.forEach((li) => li.classList.remove('active'));
+                item.classList.add('active');
+
+                // 2. Handle Page Content Switching
+                const targetId = item.querySelector('a').dataset.target;
+                
+                // Hide all pages
+                pageContent.forEach(page => {
+                    page.style.display = 'none';
+                });
+
+                // Show the target page
+                const targetPage = document.getElementById(targetId);
+                if (targetPage) {
+                    targetPage.style.display = 'block';
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
+
+
