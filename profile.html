@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monjurul Haque - Lecturer of Economics</title>
+    
+    <style>
+        /* Basic page setup */
+        :root {
+            --primary-color: #0060df;
+            --text-color: #333;
+            --bg-color: #f4f7f9;
+            --nav-bg: #ffffff;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            /* Add padding at the bottom to avoid content being hidden by the nav */
+            padding-bottom: 120px; 
+        }
+
+        /* Content section styling */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Sections for Home and Profile */
+        .content-section {
+            display: none; /* Hide all sections by default */
+            padding: 2rem 0;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block; /* Show only the active section */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero section styling for "Home" */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+            background-color: var(--nav-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-top: 0.5rem;
+        }
+
+        /* Profile section styling */
+        .profile-card {
+            background-color: var(--nav-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+        }
+
+        .profile-card h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 0.5rem;
+        }
+
+        .profile-card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+
+        /* 2. NAVIGATION MENU STYLING (from your code) */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed; /* Fix it to the bottom */
+            bottom: 20px; /* Space from bottom */
+            left: 50%;
+            transform: translateX(-50%); /* Center it horizontally */
+            width: 300px;
+            height: 70px;
+            background-color: var(--nav-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 0 20px;
+            margin: 0;
+        }
+
+        .navigation li {
+            list-style: none;
+            position: relative;
+            width: 70px;
+            height: 70px;
+            z-index: 1;
+        }
+
+        .navigation li a {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .navigation li a .icon {
+            font-size: 1.8rem; /* Made icons slightly larger */
+            transition: all 0.3s ease;
+        }
+
+        .navigation li a .text {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        /* Active state styling */
+        .navigation li.active a {
+            color: var(--primary-color);
+        }
+
+        .navigation li.active a .icon {
+            font-size: 2rem;
+            transform: translateY(-8px); /* Move icon up when active */
+        }
+        
+        .navigation li.active a .text {
+            opacity: 1;
+            font-weight: 600;
+            transform: translateY(-8px);
+        }
+
+    </style>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</head>
+<body>
+
+    <main>
+        <section id="home" class="content-section active">
+            <div class="hero">
+                <h1>Monjurul Haque</h1>
+                <p>Lecturer of Economics</p>
+            </div>
+        </section>
+
+        <section id="profile" class="content-section">
+            <div class="profile-card">
+                <h2>About Me</h2>
+                <p>
+                    Welcome to my personal profile. As a Lecturer of Economics, my focus is on... 
+                    (Here you can add your biography, research interests, publications, and contact information.)
+                </p>
+                <p>
+                    My areas of expertise include microeconomics, macroeconomic theory, and econometrics. I am passionate about teaching and mentoring the next generation of economists.
+                </p>
+            </div>
+        </section>
+    </main>
+
+
+    <nav>
+        <ul class="navigation">
+            <li class="active" data-target="home">
+                <a href="#">
+                    <span class="icon">
+                        <ion-icon name="home-outline"></ion-icon>
+                    </span>
+                    <span class="text">Home</span>
+                </a>
+            </li>
+            
+            <li data-target="profile">
+                <a href="#">
+                    <span class="icon">
+                        <ion-icon name="person-outline"></ion-icon>
+                    </span>
+                    <span class="text">Profile</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <script>
+        const listItems = document.querySelectorAll('.navigation li');
+        const sections = document.querySelectorAll('.content-section');
+
+        listItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                // Prevent default link behavior
+                e.preventDefault();
+
+                // 1. Remove 'active' class from all list items
+                listItems.forEach(li => {
+                    li.classList.remove('active');
+                });
+                
+                // 2. Add 'active' class to the clicked item
+                item.classList.add('active');
+
+                // 3. Get the target section ID from data-target
+                const targetId = item.getAttribute('data-target');
+
+                // 4. Hide all content sections
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+
+                // 5. Show the target content section
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+    </script>
+
+</body>
+</html>
