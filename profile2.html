@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monjurul Haque - Lecturer of Economics</title>
+    
+    <style>
+        /* Basic page setup */
+        :root {
+            /* Light Theme (Default) */
+            --primary-color: #0060df;
+            --text-color: #333;
+            --bg-color: #f4f7f9;
+            --card-bg: #ffffff;
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            --border-color: transparent;
+        }
+
+        body.dark-theme {
+            /* Black & White Theme (Dark Mode) */
+            --primary-color: #0084ff; /* Brighter blue for contrast */
+            --text-color: #e0e0e0;
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            --border-color: #333;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            padding-bottom: 120px; 
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Content section styling */
+        main {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .content-section {
+            display: none; /* Hide all sections by default */
+            padding: 2rem 0;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block; /* Show only the active section */
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Re-usable Card Style */
+        .card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            border: 1px solid var(--border-color);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--bg-color);
+            padding-bottom: 0.5rem;
+            margin-top: 0;
+            transition: border-color 0.3s;
+        }
+
+        .card p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        /* Hero section styling for "Home" */
+        .hero {
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin: 0;
+            color: var(--text-color);
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--primary-color);
+            margin-top: 0.5rem;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        .gallery-item {
+            height: 120px;
+            background-color: var(--bg-color);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            opacity: 0.6;
+        }
+
+        /* Article Section */
+        .article-post {
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .article-post:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        .article-post h3 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin: 0 0 0.5rem 0;
+        }
+
+        /* Settings Section (Toggle Switch) */
+        .settings-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.1rem;
+        }
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        .switch input { 
+            opacity: 0; 
+            width: 0; 
+            height: 0; 
+        }
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        input:checked + .slider {
+            background-color: var(--primary-color);
+        }
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        /* 2. NAVIGATION MENU STYLING */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 400px; /* Widened for 5 items */
+            height: 70px;
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            padding: 0 10px; /* Adjusted padding */
+            margin: 0;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .navigation li {
+            list-style: none;
+            position: relative;
+            width: 75px; /* Adjusted width for 5 items */
+            height: 70px;
+            z-index: 1;
+        }
+
+        .navigation li a {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            font-weight: 500;
+            text-decoration: none;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .navigation li a .icon {
+            font-size: 1.6rem; /* Slightly smaller for more items */
+            transition: all 0.3s ease;
+        }
+
+        .navigation li a .text {
+            font-size: 0.75rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+        }
+
+        /* Active state styling */
+        .navigation li.active a {
+            color: var(--primary-color);
+        }
+
+        .navigation li.active a .icon {
+            font-size: 1.8rem;
+            transform: translateY(-8px);
+        }
+        
+        .navigation li.active a .text {
+            opacity: 1;
+            font-weight: 600;
+            transform: translateY(-8px);
+        }
+
+    </style>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+</head>
+<body>
+
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark-theme');
+            }
+        })();
+    </script>
+
+    <main>
+        <section id="home" class="content-section active">
+            <div class="hero card">
+                <h1>Monjurul Haque</h1>
+                <p>Lecturer of Economics</p>
+            </div>
+        </section>
+
+        <section id="profile" class="content-section">
+            <div class="card">
+                <h2>About Me</h2>
+                <p>
+                    Welcome to my personal profile. As a Lecturer of Economics, my focus is on... 
+                    (Here you can add your biography, research interests, publications, and contact information.)
+                </p>
+                <p>
+                    My areas of expertise include microeconomics, macroeconomic theory, and econometrics. I am passionate about teaching and mentoring the next generation of economists.
+                </p>
+            </div>
+        </section>
+        
+        <section id="gallery" class="content-section">
+            <div class="card">
+                <h2>Photo Gallery</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item">Your photo 1</div>
+                    <div class="gallery-item">Your photo 2</div>
+                    <div class="gallery-item">Your photo 3</div>
+                    <div class="gallery-item">Your photo 4</div>
+                    <div class="gallery-item">Your photo 5</div>
+                    <div class="gallery-item">Your photo 6</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="article" class="content-section">
+            <div class="card">
+                <h2>Articles</h2>
+                <div class="article-post">
+                    <h3>Article Title One</h3>
+                    <p>This is a short snippet of the first article. Clicking on it could lead to the full post...</p>
+                </div>
+                <div class="article-post">
+                    <h3>Another Article Title</h3>
+                    <p>This is a summary of the second article, discussing key economic indicators...</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="settings" class="content-section">
+            <div class="card">
+                <h2>Settings</h2>
+                <div class="settings-item">
+                    <span>Black & White Theme</span>
+                    <label class="switch">
+                        <input type="checkbox" id="theme-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+
+    <nav>
+        <ul class="navigation">
+            <li class="active" data-target="home">
+                <a href="#">
+                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                    <span class="text">Home</span>
+                </a>
+            </li>
+            <li data-target="profile">
+                <a href="#">
+                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
+                    <span class="text">Profile</span>
+                </a>
+            </li>
+            <li data-target="gallery">
+                <a href="#">
+                    <span class="icon"><ion-icon name="images-outline"></ion-icon></span>
+                    <span class="text">Gallery</span>
+                </a>
+            </li>
+            <li data-target="article">
+                <a href="#">
+                    <span class="icon"><ion-icon name="document-text-outline"></ion-icon></span>
+                    <span class="text">Article</span>
+                </a>
+            </li>
+            <li data-target="settings">
+                <a href="#">
+                    <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
+                    <span class="text">Settings</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+
+    <script>
+        // --- Navigation Logic ---
+        const listItems = document.querySelectorAll('.navigation li');
+        const sections = document.querySelectorAll('.content-section');
+
+        listItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                listItems.forEach(li => li.classList.remove('active'));
+                item.classList.add('active');
+
+                const targetId = item.getAttribute('data-target');
+                sections.forEach(section => section.classList.remove('active'));
+                document.getElementById(targetId).classList.add('active');
+            });
+        });
+
+        // --- Theme Toggle Logic ---
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        // Set toggle state on load based on saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            themeToggle.checked = true;
+        }
+
+        // Add listener for changes
+        themeToggle.addEventListener('change', () => {
+            if (themeToggle.checked) {
+                // Switch to Dark Theme
+                body.classList.add('dark-theme');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                // Switch to Light Theme
+                body.classList.remove('dark-theme');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+    </script>
+
+</body>
+</html>
